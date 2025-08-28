@@ -157,15 +157,15 @@ p {
 }
 
 .bg-img-1 {
-  background-image: url(../img/slider/slider-img-1.jpg)
+  background-image: url(slider/slider-img-1.jpg)
 }
 
 .bg-img-2 {
-  background-image: url(../img/background-img/bg-img-2.jpg)
+  background-image: url(background-img/bg-img-2.jpg)
 }
 
 .cta-bg-1 {
-  background-image: url(../img/background-img/bg-img-3.jpg)
+  background-image: url(background-img/bg-img-3.jpg)
 }
 
 .img {
@@ -2818,14 +2818,14 @@ hr {
 }
 
 .slider-area2 {
-  background-image: url(../img/hero/hero2.png);
+  background-image: url(hero/hero2.png);
   background-repeat: no-repeat;
   background-size: cover
 }
 
 .slider-area {
   margin-top: -1px;
-  background-image: url(../img/hero/h1_hero.png);
+  background-image: url(hero/h1_hero.png);
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;  
@@ -3350,7 +3350,7 @@ hr {
   align-items: center;
   width: 50%;
   padding: 0 9%;
-  background-image: url(../img/gallery/section_bg01.png);
+  background-image: url(gallery/section_bg01.png);
   background-size: cover;
   background-repeat: no-repeat;
   justify-content: center;
@@ -3515,7 +3515,7 @@ hr {
 
 .all-starups-area .starups-img {
   width: 50%;
-  background-image: url(../img/gallery/startup.png);
+  background-image: url(gallery/startup.png);
   background-size: 100%;
   background-size: cover;
   background-repeat: no-repeat;
@@ -5631,15 +5631,15 @@ hr {
 }
 
 .breadcam_bg {
-  background-image: url(../img/banner/bradcam.png)
+  background-image: url(banner/bradcam.png)
 }
 
 .breadcam_bg_1 {
-  background-image: url(../img/banner/bradcam2.png)
+  background-image: url(banner/bradcam2.png)
 }
 
 .breadcam_bg_2 {
-  background-image: url(../img/banner/bradcam3.png)
+  background-image: url(banner/bradcam3.png)
 }
 
 .bradcam_area {
@@ -6673,7 +6673,7 @@ del {
 }
 
 .primary-checkbox input:checked+label {
-  background: url(../img/elements/primary-check.png) no-repeat center center/cover;
+  background: url(elements/primary-check.png) no-repeat center center/cover;
   border: none
 }
 
@@ -6711,7 +6711,7 @@ del {
 }
 
 .confirm-checkbox input:checked+label {
-  background: url(../img/elements/success-check.png) no-repeat center center/cover;
+  background: url(elements/success-check.png) no-repeat center center/cover;
   border: none
 }
 
@@ -6754,7 +6754,7 @@ del {
 }
 
 .disabled-checkbox input:checked+label {
-  background: url(../img/elements/disabled-check.png) no-repeat center center/cover;
+  background: url(elements/disabled-check.png) no-repeat center center/cover;
   border: none
 }
 
@@ -6792,7 +6792,7 @@ del {
 }
 
 .primary-radio input:checked+label {
-  background: url(../img/elements/primary-radio.png) no-repeat center center/cover;
+  background: url(elements/primary-radio.png) no-repeat center center/cover;
   border: none
 }
 
@@ -6830,7 +6830,7 @@ del {
 }
 
 .confirm-radio input:checked+label {
-  background: url(../img/elements/success-radio.png) no-repeat center center/cover;
+  background: url(elements/success-radio.png) no-repeat center center/cover;
   border: none
 }
 
@@ -6873,7 +6873,7 @@ del {
 }
 
 .disabled-radio input:checked+label {
-  background: url(../img/elements/disabled-radio.png) no-repeat center center/cover;
+  background: url(elements/disabled-radio.png) no-repeat center center/cover;
   border: none
 }
 
@@ -7240,7 +7240,7 @@ del {
     }
     .slider-area {
   margin-top: -1px;
-  background-image: url(../img/hero/h1_hero.png);
+  background-image: url(hero/h1_hero.png);
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;  
@@ -7249,16 +7249,16 @@ del {
 
 @keyframes sliderBackground {
   0% {
-    background-image: url(../img/hero/h1_hero.png);
+    background-image: url(hero/h1_hero.png);
   }
   33.33% {
-    background-image: url(../img/hero/h2_hero.png);
+    background-image: url(hero/h2_hero.png);
   }
   66.66% {
-    background-image: url(../img/hero/h3_hero.png);
+    background-image: url(hero/h3_hero.png);
   }
   100% {
-    background-image: url(../img/hero/h1_hero.png);
+    background-image: url(hero/h1_hero.png);
   }
 }
     .testimonial-section {
