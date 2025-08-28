@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Smart Symptom Checker</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #e6f7ff, #fff3e0);
+      color: #333;
+      padding: 30px 15px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    h1 { font-size: 2.5rem; margin-bottom: 20px; color: #004d66; }
+    .info-inputs { display: flex; gap: 20px; margin-bottom: 30px; flex-wrap: wrap; justify-content: center; }
+    .info-inputs input { padding: 10px; border: 2px solid #ccc; border-radius: 8px; font-size: 1rem; width: 150px; }
+    .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      max-width: 1100px;
+      margin-bottom: 30px;
+    }
+    .box {
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      text-align: center;
+      transition: transform 0.3s;
+    }
+    .box:hover { transform: translateY(-5px); }
+    .box img { width: 80px; height: 80px; object-fit: cover; margin-bottom: 10px; }
+    label { display: block; margin-top: 10px; font-weight: 500; }
+    .submit-btn {
+      padding: 15px 25px;
+      background: #009688;
+      color: white;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .submit-btn:hover { background: #00796b; }
+    #result {
+      margin-top: 40px;
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      max-width: 700px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    .disclaimer { margin-top: 15px; font-size: 13px; color: #777; }
+  </style>
+</head>
+<body>
+  <h1>Smart Symptom Checker</h1>
+
+  <form id="symptomForm">
+    <div class="info-inputs">
+      <input type="number" id="age" name="age" placeholder="Age" required>
+      <input type="number" id="weight" name="weight" placeholder="Weight (kg)" required>
+    </div>
+
+    <div class="container">
+      <div class="box">
+        <img src="https://img.icons8.com/clouds/100/fever.png" alt="Fever">
+        <label><input type="checkbox" name="symptom" value="fever"> Fever</label>
+      </div>
+      <div class="box">
+        <img src="https://img.icons8.com/clouds/100/coughing.png" alt="Cough">
+        <label><input type="checkbox" name="symptom" value="cough"> Cough</label>
+      </div>
+      <div class="box">
+        <img src="icons8-headache-48.png" alt="Headache">
+        <label><input type="checkbox" name="symptom" value="headache"> Headache</label>
+      </div>
+      <div class="box">
+        <img src="icons8-throat-48.png" alt="Sore Throat">
+        <label><input type="checkbox" name="symptom" value="sore throat"> Sore Throat</label>
+      </div>
+      <div class="box">
+        <img src="https://img.icons8.com/emoji/100/tired-face.png" alt="Fatigue">
+        <label><input type="checkbox" name="symptom" value="fatigue"> Fatigue</label>
+      </div>
+      <div class="box">
+        <img src="https://img.icons8.com/emoji/100/face-with-thermometer.png" alt="Chills">
+        <label><input type="checkbox" name="symptom" value="chills"> Chills</label>
+      </div>
+      <div class="box">
+        <img src="https://img.icons8.com/emoji/100/dizzy-face.png" alt="Weight Loss">
+        <label><input type="checkbox" name="symptom" value="weight loss"> Weight Loss</label>
+      </div>
+      <div class="box">
+        <img src="icons8-diarrhea-50.png" alt="Diarrhea">
+        <label><input type="checkbox" name="symptom" value="diarrhea"> Diarrhea</label>
+      </div>
+      <div class="box">
+        <img src="https://img.icons8.com/emoji/100/sneezing-face.png" alt="Night Sweats">
+        <label><input type="checkbox" name="symptom" value="night sweats"> Night Sweats</label>
+      </div>
+      <div class="box">
+        <img src="https://img.icons8.com/emoji/100/nauseated-face.png" alt="Nausea">
+        <label><input type="checkbox" name="symptom" value="nausea"> Nausea</label>
+      </div>
+      <div class="box">
+        <img src="https://img.icons8.com/emoji/100/face-vomiting.png" alt="Vomiting">
+        <label><input type="checkbox" name="symptom" value="vomiting"> Vomiting</label>
+      </div>
+      <div class="box">
+        <img src="https://img.icons8.com/emoji/100/face-with-medical-mask.png" alt="Shortness of Breath">
+        <label><input type="checkbox" name="symptom" value="shortness of breath"> Shortness of Breath</label>
+      </div>
+      <div class="box">
+        <img src="rash.png" alt="Rash">
+        <label><input type="checkbox" name="symptom" value="rash"> Rash</label>
+      </div>
+      <div class="box">
+        <img src="pain.png" alt="Muscle Pain">
+        <label><input type="checkbox" name="symptom" value="muscle pain"> Muscle Pain</label>
+      </div>
+    </div>
+
+    <div style="text-align:center;">
+      <button type="submit" class="submit-btn">Check Diagnosis</button>
+    </div>
+  </form>
+
+  <div id="result" style="display:none;">
+    <h2>Diagnosis Result</h2>
+    <p><strong>Possible Illness:</strong> <span id="illnessName"></span></p>
+    <p><strong>Symptoms:</strong> <span id="symptomList"></span></p>
+    <p><strong>Recommended Medicine:</strong> <span id="medicineText"></span></p>
+    <p><strong>Recommended Advice:</strong> <span id="adviceText"></span></p>
+    <p class="disclaimer">Disclaimer: This is not a medical diagnosis. Always consult a healthcare professional if symptoms persist.</p>
+  </div>
+
+  <script>
+    const form = document.getElementById('symptomForm');
+    const resultBox = document.getElementById('result');
+    const illnessName = document.getElementById('illnessName');
+    const symptomList = document.getElementById('symptomList');
+    const medicineText = document.getElementById('medicineText');
+    const adviceText = document.getElementById('adviceText');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const age = parseInt(document.getElementById('age').value);
+      const weight = parseInt(document.getElementById('weight').value);
+      const symptoms = Array.from(document.querySelectorAll('input[name="symptom"]:checked')).map(input => input.value);
+
+      let illness = "Unknown";
+      let medicine = "No specific medicine recommended. Consult a doctor.";
+      let advice = "Rest, hydrate well, and monitor your symptoms.";
+
+      if (symptoms.includes("fever") && symptoms.includes("chills") && symptoms.includes("headache")) {
+        illness = "Malaria";
+        medicine = "Take **Coartem (Artemether-Lumefantrine)**. For children under 12, a specific child-dose is required. The dosage for an adult is typically 4 tablets twice a day for 3 days.";
+        advice = "Drink plenty of fluids and avoid mosquito bites. See a doctor to confirm the diagnosis and get the correct dosage for your weight.";
+      } else if (symptoms.includes("diarrhea") || symptoms.includes("vomiting") || symptoms.includes("nausea")) {
+        illness = "Gastrointestinal Infection";
+        medicine = "You may use **Oral Rehydration Salts (ORS)** to replace lost fluids. For nausea, you could try **Metoclopramide** or **Ondansetron** .";
+        advice = "Stay hydrated and eat light, bland foods. Seek medical care if symptoms worsen or persist for more than 24 hours.";
+      } else if (symptoms.includes("cough") && symptoms.includes("night sweats") && symptoms.includes("weight loss")) {
+        illness = "Tuberculosis";
+        medicine = "This requires a specific multi-drug regimen prescribed by a doctor (e.g., Isoniazid, Rifampin, Pyrazinamide, Ethambutol). **Do not self-medicate.**";
+        advice = "Persistent coughs need immediate medical testing and diagnosis. Wear a mask to prevent spreading, and rest to support your immune system.";
+      } else if (symptoms.includes("fatigue") && symptoms.includes("weight loss") && symptoms.includes("night sweats")) {
+        illness = "HIV/AIDS (Possible)";
+        medicine = "This condition requires **Antiretroviral Therapy (ART)** which must be prescribed and monitored by a healthcare professional. **Self-medication is extremely dangerous.**";
+        advice = "Seek immediate HIV testing. Maintain a healthy diet and lifestyle, and consult a doctor for a proper diagnosis and treatment plan.";
+      } else if (symptoms.includes("rash") && symptoms.includes("muscle pain") && symptoms.includes("fever")) {
+        illness = "Viral Infection (e.g., Dengue)";
+        medicine = "Use **Paracetamol** to manage fever and pain. **Avoid NSAIDs like Ibuprofen** as they can increase the risk of bleeding in cases of dengue.";
+        advice = "Rest, hydrate well, and monitor fever closely. Seek medical care if symptoms worsen or if you notice any bleeding from your gums or nose.";
+      }
+
+      illnessName.textContent = illness;
+      symptomList.textContent = symptoms.join(", ");
+      medicineText.textContent = medicine;
+      adviceText.textContent = advice;
+      resultBox.style.display = "block";
+    });
+  </script>
+</body>
+</html>

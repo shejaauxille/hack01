@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Smart Symptom Checker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(to right, #e6f7ff, #fff3e0);
+            color: #333;
+            padding: 30px 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 { font-size: 2.5rem; margin-bottom: 20px; color: #004d66; }
+        .info-inputs { display: flex; gap: 20px; margin-bottom: 30px; flex-wrap: wrap; justify-content: center; }
+        .info-inputs input { padding: 10px; border: 2px solid #ccc; border-radius: 8px; font-size: 1rem; width: 150px; }
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            max-width: 1100px;
+            margin-bottom: 30px;
+        }
+        .box {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        .box:hover { transform: translateY(-5px); }
+        .box img { width: 80px; height: 80px; object-fit: cover; margin-bottom: 10px; }
+        label { display: block; margin-top: 10px; font-weight: 500; }
+        .submit-btn {
+            padding: 15px 25px;
+            background: #009688;
+            color: white;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .submit-btn:hover { background: #00796b; }
+        /* --- Styles for the new pop-up card --- */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+        .modal-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+        .modal-card {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 20px;
+            max-width: 600px;
+            width: 90%;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            position: relative;
+            transform: translateY(-20px) scale(0.9);
+            transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            text-align: center;
+        }
+        .modal-overlay.active .modal-card {
+            transform: translateY(0) scale(1);
+        }
+        .modal-card h2 {
+            font-size: 2.2rem;
+            color: #004d66;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #009688;
+            padding-bottom: 10px;
+        }
+        .modal-card p {
+            margin: 15px 0;
+            line-height: 1.6;
+        }
+        .modal-card strong {
+            color: #00796b;
+        }
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 2rem;
+            color: #aaa;
+            cursor: pointer;
+            line-height: 1;
+            transition: color 0.3s ease;
+        }
+        .close-btn:hover {
+            color: #ff5252;
+        }
+        .disclaimer { margin-top: 20px; font-size: 13px; color: #777; font-style: italic; }
+        .modal-buttons {
+            margin-top: 25px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        .modal-btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        .modal-btn.book {
+            background: #009688;
+            color: white;
+        }
+        .modal-btn.book:hover {
+            background: #00796b;
+            transform: scale(1.05);
+        }
+        .modal-btn.print {
+            background: #1e88e5;
+            color: white;
+        }
+        .modal-btn.print:hover {
+            background: #1565c0;
+            transform: scale(1.05);
+        }
+        .modal-btn.close {
+            background: #f44336;
+            color: white;
+        }
+        .modal-btn.close:hover {
+            background: #d32f2f;
+            transform: scale(1.05);
+        }
+
+        /* Print-specific styles to hide unnecessary elements */
+        @media print {
+            body > *:not(.modal-overlay) {
+                display: none;
+            }
+            .modal-overlay.active {
+                position: static;
+                display: block;
+                opacity: 1;
+                background-color: white;
+            }
+            .modal-card {
+                box-shadow: none;
+                transform: none;
+                width: 100%;
+                max-width: 100%;
+            }
+            .close-btn, .modal-buttons, .disclaimer {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Smart Symptom Checker</h1>
+
+    <form id="symptomForm">
+        <div class="info-inputs">
+            <input type="number" id="age" name="age" placeholder="Age" required>
+            <input type="number" id="weight" name="weight" placeholder="Weight (kg)" required>
+        </div>
+
+        <div class="container">
+            <div class="box">
+                <img src="https://img.icons8.com/clouds/100/fever.png" alt="Fever">
+                <label><input type="checkbox" name="symptom" value="fever"> Fever</label>
+            </div>
+            <div class="box">
+                <img src="https://img.icons8.com/clouds/100/coughing.png" alt="Cough">
+                <label><input type="checkbox" name="symptom" value="cough"> Cough</label>
+            </div>
+            <div class="box">
+                <img src="icons8-headache-48.png" alt="Headache">
+                <label><input type="checkbox" name="symptom" value="headache"> Headache</label>
+            </div>
+            <div class="box">
+                <img src="icons8-throat-48.png" alt="Sore Throat">
+                <label><input type="checkbox" name="symptom" value="sore throat"> Sore Throat</label>
+            </div>
+            <div class="box">
+                <img src="https://img.icons8.com/emoji/100/tired-face.png" alt="Fatigue">
+                <label><input type="checkbox" name="symptom" value="fatigue"> Fatigue</label>
+            </div>
+            <div class="box">
+                <img src="https://img.icons8.com/emoji/100/face-with-thermometer.png" alt="Chills">
+                <label><input type="checkbox" name="symptom" value="chills"> Chills</label>
+            </div>
+            <div class="box">
+                <img src="https://img.icons8.com/emoji/100/dizzy-face.png" alt="Weight Loss">
+                <label><input type="checkbox" name="symptom" value="weight loss"> Weight Loss</label>
+            </div>
+            <div class="box">
+                <img src="icons8-diarrhea-50.png" alt="Diarrhea">
+                <label><input type="checkbox" name="symptom" value="diarrhea"> Diarrhea</label>
+            </div>
+            <div class="box">
+                <img src="https://img.icons8.com/emoji/100/sneezing-face.png" alt="Night Sweats">
+                <label><input type="checkbox" name="symptom" value="night sweats"> Night Sweats</label>
+            </div>
+            <div class="box">
+                <img src="https://img.icons8.com/emoji/100/nauseated-face.png" alt="Nausea">
+                <label><input type="checkbox" name="symptom" value="nausea"> Nausea</label>
+            </div>
+            <div class="box">
+                <img src="https://img.icons8.com/emoji/100/face-vomiting.png" alt="Vomiting">
+                <label><input type="checkbox" name="symptom" value="vomiting"> Vomiting</label>
+            </div>
+            <div class="box">
+                <img src="https://img.icons8.com/emoji/100/face-with-medical-mask.png" alt="Shortness of Breath">
+                <label><input type="checkbox" name="symptom" value="shortness of breath"> Shortness of Breath</label>
+            </div>
+            <div class="box">
+                <img src="rash.png" alt="Rash">
+                <label><input type="checkbox" name="symptom" value="rash"> Rash</label>
+            </div>
+            <div class="box">
+                <img src="pain.png" alt="Muscle Pain">
+                <label><input type="checkbox" name="symptom" value="muscle pain"> Muscle Pain</label>
+            </div>
+        </div>
+
+        <div style="text-align:center;">
+            <button type="submit" class="submit-btn">Check Diagnosis</button>
+        </div>
+    </form>
+
+    <div id="resultModal" class="modal-overlay">
+        <div class="modal-card">
+            <span class="close-btn">&times;</span>
+            <h2>Diagnosis Result</h2>
+            <p><strong>Possible Illness:</strong> <span id="illnessName"></span></p>
+            <p><strong>Symptoms:</strong> <span id="symptomList"></span></p>
+            <p><strong>Recommended Medicine:</strong> <span id="medicineText"></span></p>
+            <p><strong>Recommended Advice:</strong> <span id="adviceText"></span></p>
+            <p class="disclaimer">Disclaimer: This is not a medical diagnosis. Always consult a healthcare professional if symptoms persist.</p>
+            <div class="modal-buttons">
+                <button class="modal-btn book" id="bookAppointmentBtn">Book Appointment</button>
+                <button class="modal-btn print" id="printReportBtn">Print Report</button>
+                <button class="modal-btn close" id="closeModalBtn">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('symptomForm');
+        const resultModal = document.getElementById('resultModal');
+        const illnessName = document.getElementById('illnessName');
+        const symptomList = document.getElementById('symptomList');
+        const medicineText = document.getElementById('medicineText');
+        const adviceText = document.getElementById('adviceText');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        const bookAppointmentBtn = document.getElementById('bookAppointmentBtn');
+        const printReportBtn = document.getElementById('printReportBtn');
+        const closeBtnIcon = document.querySelector('.close-btn');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const age = parseInt(document.getElementById('age').value);
+            const weight = parseInt(document.getElementById('weight').value);
+            const symptoms = Array.from(document.querySelectorAll('input[name="symptom"]:checked')).map(input => input.value);
+
+            let illness = "Unknown";
+            let medicine = "No specific medicine recommended. Consult a doctor.";
+            let advice = "Rest, hydrate well, and monitor your symptoms.";
+
+            if (symptoms.includes("fever") && symptoms.includes("cough") && symptoms.includes("shortness of breath") || symptoms.includes("fatigue")) {
+                illness = "COVID-19 (Possible)";
+                medicine = "Use **Paracetamol** or **Ibuprofen** to manage fever and aches. A cough syrup may help with throat irritation. **Consult a doctor for a proper diagnosis and treatment plan.**";
+                advice = "Isolate yourself, wear a mask, and practice good hygiene. Get tested as soon as possible and monitor your oxygen levels if you have a pulse oximeter.";
+            } else if (symptoms.includes("fever") && symptoms.includes("chills") && symptoms.includes("headache")) {
+                illness = "Malaria";
+                medicine = "Take **Coartem (Artemether-Lumefantrine)**. For children under 12, a specific child-dose is required. The dosage for an adult is typically 4 tablets twice a day for 3 days.";
+                advice = "Drink plenty of fluids and avoid mosquito bites. See a doctor to confirm the diagnosis and get the correct dosage for your weight.";
+            } else if (symptoms.includes("diarrhea") && symptoms.includes("vomiting") && symptoms.includes("nausea")) {
+                illness = "Food Poisoning";
+                medicine = "You may use **Oral Rehydration Salts (ORS)** to replace lost fluids. For nausea, you could try **Metoclopramide** or **Ondansetron** (consult a doctor first).";
+                advice = "Stay hydrated with water and clear broths. Avoid solid foods for a few hours. Seek medical care if symptoms worsen or persist for more than 24 hours.";
+            } else if (symptoms.includes("stomach cramps") && symptoms.includes("diarrhea") && !symptoms.includes("fever")) {
+                illness = "Irritable Bowel Syndrome (IBS)";
+                medicine = "Consider a low-FODMAP diet and stress management. Over-the-counter anti-diarrheals like **Loperamide** or an antispasmodic like **Mebeverine** may help.";
+                advice = "This is a chronic condition. Identify and avoid trigger foods. Regular exercise and stress management are key. Consult a gastroenterologist for a long-term plan.";
+            } else if (symptoms.includes("cough") && symptoms.includes("night sweats") && symptoms.includes("weight loss")) {
+                illness = "Tuberculosis";
+                medicine = "This requires a specific multi-drug regimen prescribed by a doctor (e.g., Isoniazid, Rifampin, Pyrazinamide, Ethambutol). **Do not self-medicate.**";
+                advice = "Persistent coughs need immediate medical testing and diagnosis. Wear a mask to prevent spreading, and rest to support your immune system.";
+            } else if (symptoms.includes("fatigue") && symptoms.includes("weight loss") && symptoms.includes("night sweats")) {
+                illness = "HIV/AIDS (Possible)";
+                medicine = "This condition requires **Antiretroviral Therapy (ART)** which must be prescribed and monitored by a healthcare professional. **Self-medication is extremely dangerous.**";
+                advice = "Seek immediate HIV testing. Maintain a healthy diet and lifestyle, and consult a doctor for a proper diagnosis and treatment plan.";
+            } else if (symptoms.includes("rash") && symptoms.includes("muscle pain") && symptoms.includes("fever")) {
+                illness = "Viral Infection (e.g., Dengue)";
+                medicine = "Use **Paracetamol** to manage fever and pain. **Avoid NSAIDs like Ibuprofen** as they can increase the risk of bleeding in cases of dengue.";
+                advice = "Rest, hydrate well, and monitor fever closely. Seek medical care if symptoms worsen or if you notice any bleeding from your gums or nose.";
+            } else if (symptoms.includes("sore throat") && symptoms.includes("cough") && symptoms.includes("fever")) {
+                illness = "Common Cold or Flu";
+                medicine = "Over-the-counter medications like **Paracetamol** or **Ibuprofen** can help with fever and body aches. Use lozenges for a sore throat and drink plenty of warm fluids.";
+                advice = "Rest and stay hydrated. Symptoms typically resolve within a week. If they worsen or you have difficulty breathing, see a doctor.";
+            } else if (symptoms.includes("headache") && symptoms.includes("nausea")) {
+                illness = "Migraine";
+                medicine = "Over-the-counter pain relievers like **Ibuprofen** or **Naproxen** may help. For more severe cases, a doctor may prescribe triptans like **Sumatriptan**.";
+                advice = "Rest in a dark, quiet room. Avoid triggers such as certain foods, smells, or stress. Keeping a headache diary can help identify patterns.";
+            } else if (symptoms.includes("fatigue") && symptoms.includes("muscle pain") && symptoms.includes("headache")) {
+                illness = "Fibromyalgia";
+                medicine = "Treatment may include pain relievers such as **Tramadol**, antidepressants, and anti-seizure drugs. **It's crucial to consult a doctor for a proper diagnosis.**";
+                advice = "Management often involves a combination of medication, physical therapy, and stress reduction techniques. Regular, low-impact exercise can also be beneficial.";
+            }
+
+            illnessName.textContent = illness;
+            symptomList.textContent = symptoms.join(", ");
+            medicineText.textContent = medicine;
+            adviceText.textContent = advice;
+            
+            resultModal.style.display = "flex";
+            setTimeout(() => {
+                resultModal.classList.add('active');
+            }, 10);
+        });
+
+        const closeModal = () => {
+            resultModal.classList.remove('active');
+            setTimeout(() => {
+                resultModal.style.display = "none";
+            }, 400);
+        };
+
+        closeModalBtn.addEventListener('click', closeModal);
+        closeBtnIcon.addEventListener('click', closeModal);
+
+        bookAppointmentBtn.addEventListener('click', function() {
+            window.location.href = "index.html";
+        });
+
+        printReportBtn.addEventListener('click', function() {
+            window.print();
+        });
+
+        resultModal.addEventListener('click', function(e) {
+            if (e.target === resultModal) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>

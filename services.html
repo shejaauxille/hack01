@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <title>How it works</title>
+    <style>
+        /* General Body and Font Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7f6;
+            color: #333;
+        }
+
+        /* --- Global Container and Typography --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        h1, h2, h3 {
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #1a2a4b;
+        }
+
+        h1 span {
+            color: #007bff;
+        }
+
+        p {
+            font-size: 1rem;
+            color: #555;
+        }
+
+        /* --- Header/Navigation Bar --- */
+        #header {
+            background-color: #ffffff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand h1 {
+            font-size: 1.8rem;
+            margin: 0;
+        }
+
+        .brand a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .nav-list ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-list li {
+            margin-left: 30px;
+        }
+
+        .nav-list a {
+            text-decoration: none;
+            color: #555;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-list a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            display: block;
+            margin-top: 5px;
+            right: 0;
+            background: #007bff;
+            transition: width 0.4s ease;
+        }
+
+        .nav-list a:hover:after {
+            width: 100%;
+            left: 0;
+            background: #007bff;
+        }
+
+        .cta {
+            background-color: #007bff;
+            color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 25px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .cta:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        /* Hamburger Menu for Mobile */
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+        
+        .bar {
+            display: block;
+            width: 25px;
+            height: 3px;
+            margin: 5px auto;
+            -webkit-transition: all 0.3s ease-in-out;
+            transition: all 0.3s ease-in-out;
+            background-color: #333;
+        }
+        
+        /* --- How It Works Section --- */
+        #how-it-works {
+            padding: 100px 0;
+            background: #ffffff;
+        }
+
+        .how-it-works-top {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .how-it-works-top p {
+            max-width: 800px;
+            margin: 15px auto 0;
+            font-size: 1.1rem;
+        }
+
+        .how-it-works-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+        }
+
+        .how-it-works-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .how-it-works-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .how-it-works-card .icon {
+            width: 70px;
+            height: 70px;
+            background: #e9f2ff;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 25px;
+        }
+
+        .how-it-works-card .icon img {
+            width: 45px;
+            height: 45px;
+        }
+        
+        .how-it-works-card h2 {
+            font-size: 1.6rem;
+            color: #007bff;
+            margin-bottom: 15px;
+        }
+
+        .how-it-works-card p {
+            font-size: 1rem;
+            text-align: left;
+            margin-bottom: 25px;
+        }
+
+        .steps-list {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+        }
+
+        .steps-list li {
+            position: relative;
+            padding: 12px 0 12px 35px;
+            font-size: 1rem;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .steps-list li:last-child {
+            border-bottom: none;
+        }
+
+        .steps-list li:before {
+            content: counter(step-counter);
+            counter-increment: step-counter;
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 25px;
+            height: 25px;
+            background: #007bff;
+            color: #ffffff;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.9rem;
+            font-weight: 700;
+        }
+
+        /* --- Media Queries for Responsiveness --- */
+        @media (max-width: 768px) {
+            .nav-list {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: #ffffff;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                padding: 20px;
+                text-align: center;
+            }
+
+            .nav-list ul {
+                flex-direction: column;
+            }
+
+            .nav-list li {
+                margin: 10px 0;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .nav-list.active {
+                display: flex;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .how-it-works-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+        <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+      <!-- Header -->
+  <section id="header">
+    <div class="header container">
+      <div class="nav-bar">
+        <div class="brand">
+          <a href="#hero">
+            <h1><span>M</span>ENYA <span>C</span>HECK</h1>
+          </a>
+        </div>
+        <div class="nav-list">
+          <div class="hamburger">
+            <div class="bar"></div>
+          </div>
+          <ul>
+            <li><a href="index.html" data-after="Home">Home</a></li>
+            <li><a href="services.html" data-after="Service">About</a></li>
+            <li><a href="test.html" data-after="Projects">Test</a></li>
+            <li><a href="login.php" type="button" class="cta">Book an appointment</a></li>
+
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End Header -->
+    
+    <section id="how-it-works">
+        <div class="container">
+            <div class="how-it-works-top">
+                <h1>How Our System <span>Works</span></h1>
+                <p>Our two-part system is designed to provide you with a simple, secure, and helpful experience. From getting a quick symptom check to booking a professional consultation, here’s how we help you take control of your mental health.</p>
+            </div>
+            <div class="how-it-works-grid">
+                <div class="how-it-works-card">
+                    <div class="icon">
+                        <img src="file.png" alt="Quiz Icon">
+                    </div>
+                    <h2>Taking a symptom test of what one is suffering from</h2>
+                    <p>Our online test is a simple and confidential way to understand potential symptoms. The test results are for informational purposes and are not a substitute for professional medical advice.</p>
+                    <ul class="steps-list">
+                        <li>Navigate to the **Test** section on our website.</li>
+                        <li>Answer a series of questions about your feelings, and symptoms over the past few weeks.</li>
+                        <li>Submit your answers to get an immediate, confidential results with medecine to take  .</li>
+                        <li>The result will provide a general indication of your state and may recommend a follow-up with a professional.</li>
+                    </ul>
+                </div>
+                
+                <div class="how-it-works-card">
+                    <div class="icon">
+                        <img src="https://img.icons8.com/color/96/calendar--v1.png" alt="Calendar Icon">
+                    </div>
+                    <h2>Booking an Appointment</h2>
+                    <p>When you're ready to speak with a professional, our secure booking system makes it easy to schedule a consultation with a certified mental health expert.</p>
+                    <ul class="steps-list">
+                        <li>Click on the **Book an appointment** button in the navigation bar.</li>
+                        <li>If you're a new user, create an account. Otherwise, simply log in.</li>
+                        <li>Book a service </li>
+                        <li>wait for approval</li>
+                        <li>Select a convenient date and time from the available slots.</li>
+                        <li>Review and confirm your booking details. You will receive a notification once your appointment is approved and confirmed.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</body>
+
+</html>

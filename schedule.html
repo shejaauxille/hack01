@@ -1,0 +1,482 @@
+<!doctype html>
+<html class="no-js" lang="zxx">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title> Medical HTML-5 Template </title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/x-icon" href=" favicon.ico">
+
+    <!-- CSS here -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/slicknav.css">
+    <link rel="stylesheet" href="css/animate.min.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
+    <link rel="stylesheet" href="css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="css/themify-icons.css">
+    <link rel="stylesheet" href="css/themify-icons.css">
+    <link rel="stylesheet" href="css/slick.css">
+    <link rel="stylesheet" href="css/nice-select.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <!--? Preloader Start -->
+    <div id="preloader-active">
+        <div class="preloader d-flex align-items-center justify-content-center">
+            <div class="preloader-inner position-relative">
+                <div class="preloader-circle"></div>
+                <div class="preloader-img pere-text">
+                    <img src=" logo/loder.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Preloader Start -->
+    <header>
+        <!--? Header Start -->
+        <div class="header-area">
+            <div class="main-header header-sticky">
+                <div class="container-fluid">
+                    <div class="row align-items-center">
+                        <!-- Logo -->
+                        <div class="col-xl-2 col-lg-2 col-md-1">
+                            <div class="logo">
+                                <a href="index.html"><img src=" logo/logo.png" alt=""></a>
+                            </div>
+                        </div>
+                        <div class="col-xl-10 col-lg-10 col-md-10">
+                            <div class="menu-main d-flex align-items-center justify-content-end">
+                                <!-- Main-menu -->
+                                <div class="main-menu f-right d-none d-lg-block">
+                                    <nav>
+                                        <ul id="navigation">
+                                            <li><a href="index.html">Home</a></li>
+                                            <li><a href="about.html">About</a></li>
+                                            <li><a href="doctor.html">Doctors</a></li>
+                                        <li><a href="department.html">Services</a></li>
+                                            <li><a href="schedule.html">Schedule</a></li>
+                                        <li><a href="contact.html">Contact</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                            <div class="header-right-btn f-right d-none d-lg-block ml-30">
+                                <a href="appointment.html" class="btn header-btn">appointment</a>
+                            </div>
+
+                            </div>
+                        </div>   
+                        <!-- Mobile Menu -->
+                        <div class="col-12">
+                            <div class="mobile_menu d-block d-lg-none"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Header End -->
+    </header>
+    <main class="main">
+
+ <!--schedule start-->
+
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f0f4f8;
+    color: #222;
+    padding: 3rem 2rem;
+  }
+
+  h1 {
+    text-align: center;
+    font-weight: 800;
+    font-size: 3rem;
+    margin-bottom: 4rem;
+    color: #1a1a1a;
+  }
+
+  .schedule-wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 3rem;
+    max-width: 1300px;
+    margin: 0 auto;
+  }
+
+  .card {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 12px 35px rgba(0,0,0,0.12);
+    overflow: hidden;
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+  }
+  .card:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 24px 55px rgba(0,0,0,0.18);
+  }
+
+  .card-header {
+    position: relative;
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    color: white;
+    padding: 2rem 2rem 3rem;
+    text-align: center;
+  }
+
+  .card-header img {
+    width: 130px;
+    height: 130px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 5px solid white;
+    margin-bottom: 1.25rem;
+    box-shadow: 0 0 14px rgba(0,0,0,0.12);
+  }
+
+  .badge {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    background: #fbbf24;
+    color: #1f2937;
+    font-weight: 700;
+    padding: 0.5rem 1.3rem;
+    font-size: 0.95rem;
+    border-radius: 40px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    box-shadow: 0 2px 8px rgba(251, 191, 36, 0.5);
+  }
+
+  .card-header h2 {
+    font-size: 2.25rem;
+    font-weight: 900;
+    margin: 0 0 0.25rem;
+    text-shadow: 0 1px 5px rgba(0,0,0,0.15);
+  }
+
+  .card-header p {
+    font-style: italic;
+    font-weight: 600;
+    font-size: 1.1rem;
+    opacity: 0.85;
+    margin: 0;
+  }
+
+  .schedule-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 1rem;
+    margin: 2rem 2.5rem 2.5rem;
+  }
+
+  .schedule-table th,
+  .schedule-table td {
+    padding: 1rem 1.5rem;
+    font-size: 1.15rem;
+    font-weight: 700;
+    border-radius: 12px;
+  }
+
+  .schedule-table th {
+    background: #e0e7ff;
+    color: #4338ca;
+    width: 40%;
+    text-align: left;
+  }
+
+  .schedule-table td {
+    background: #eef2ff;
+    color: #1e293b;
+  }
+  .header-sticky {
+  position: sticky;
+  top: 0;
+  z-index: 999; /* Make sure it's above all content */
+  background-color: #fff; /* Or your preferred background */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08); /* Optional: subtle shadow */
+}
+
+.main {
+  padding-top: 100px; /* Adjust to match header height */
+}
+
+
+</style>
+
+<h1>KMC Weekly Schedule for Consultation</h1>
+
+<div class="schedule-wrapper">
+
+  <div class="card">
+    <div class="card-header">
+      <img src=" doctors/Dr. Chrysostome Kagimbana .png" alt="Dr. Chrysostome Kagimbana">
+      <div class="badge">Dermatology</div>
+      <h2>Dr. Chrysostone KAGIMBANA</h2>
+      <p>General Health Care</p>
+    </div>
+    <table class="schedule-table" aria-label="Schedule for Dr. chrystome kagimbana">
+      <tbody>
+        <tr><th>Tuesday</th><td>17:00 – 21:00</td></tr>
+        <tr><th>Thursday</th><td>17:00 – 21:00</td></tr>
+        <tr><th>Saturday</th><td>10:00 - 17:00</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <img src=" doctors/Dr. NDATINYA Augustin.png" alt="Dr. NDATINYA Augustin">
+      <div class="badge">Pediatrics</div>
+      <h2>Dr. DATINYA Augustin</h2>
+      <p>Child Specialist</p>
+     </div>
+    <table class="schedule-table" aria-label="Schedule for Dr. NDATINYA Aug">
+      <tbody>
+        <tr><th>Mon–Fri</th><td>13:00 – 17:00</td></tr>
+        <tr><th>Saturday</th><td>10:00 – 14:00</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+ <div class="card">
+    <div class="card-header">
+      <img src=" doctors/Dr. NDATINYA Augustin.png" alt="Dr. NDATINYA Augustin">
+      <div class="badge">Allergist</div>
+      <h2>Dr. NDATINYA Augustin</h2>
+      <p>Allergist</p>
+    </div>
+    <table class="schedule-table" aria-label="Schedule for Dr. NDATINYA Augustin">
+      <tbody>
+        <tr><th>Mon–Fri</th><td>13:00 – 17:00</td></tr>
+        <tr><th>Saturday</th><td>10:00 – 14:00</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+
+   <div class="card">
+    <div class="card-header">
+      <img src=" doctors/Dr. NDATINYA Augustin.png" alt="Dr. NDATINYA Augustin">
+      <div class="badge">Asthma Clinic</div>
+      <h2>Dr. NDATINYA Augustin</h2>
+      <p>Asthma Clinic</p>
+    </div>
+    <table class="schedule-table" aria-label="Schedule for Dr. NDATINYA Augustine">
+      <tbody>
+        <tr><th>Mon–Thu</th><td>10:00 – 17:00</td></tr>
+        <tr><th>Saturday</th><td>09:30 – 17:00</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+
+ 
+
+ <div class="card">
+    <div class="card-header">
+      <img src=" doctors/Dr. NDATINYA Augustin.png" alt="Dr. NDATINYA Augustin">
+      <div class="badge">NUTRITION</div>
+      <h2>Dr. NDATINYA Augustin</h2>
+      <p>NUTRITION</p>
+    </div>
+    <table class="schedule-table" aria-label="Schedule for Dr. NDATINYA Augustin">
+      <tbody>
+        <tr><th>Mon</th><td>10:00 – 17:00</td></tr>
+        <tr><th>Mon</th><td>10:00 – 17:00</td></tr>
+        <tr><th>Mon</th><td>10:00 – 17:00</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <img src=" doctors/dr edgar gasana.png" alt="dr edgar gasana.png">
+      <div class="badge">ENT SURGERY</div>
+      <h2>Dr. Edgar GASANA</h2>
+      <p>ENT SURGERY</p>
+    </div>
+    <table class="schedule-table" aria-label="Schedule for Dr. Hakizimana Bosco">
+      <tbody>
+        <tr><th>Mon</th><td>16:00 - 20:00</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <img src=" doctors/dr charles nkurunziza.png" alt="Dr. dr charles nkurunziza.png">
+      <div class="badge">ENT SURGERY</div>
+      <h2>Dr. Charles NKURUNZIZA</h2>
+      <p>ENT SURGERY</p>
+    </div>
+    <table class="schedule-table" aria-label="Schedule for Dr. Umutoni Solange">
+      <tbody>
+        <tr><th>Tuesday</th><td>16:00 – 20:00</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <img src=" doctors/dr edgar gasana.png" alt="dr edgar gasana.png">
+      <div class="badge">ENT SURGERY</div>
+      <h2>Dr. Edgar GASANA</h2>
+      <p>ENT SURGERY</p>
+    </div>
+    <table class="schedule-table" aria-label="Schedule for Dr. Hakizimana Bosco">
+      <tbody>
+        <tr><th>Wednesday</th><td>16:00 - 20:00</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+ <div class="card">
+    <div class="card-header">
+      <img src=" doctors/Dr Gratien Tuyishime.png" alt="Dr Gratien Tuyishime.png">
+      <div class="badge">ENT SURGERY</div>
+      <h2>Dr. Gratien tuyishime</h2>
+      <p>ENT SURGERY</p>
+    </div>
+    <table class="schedule-table" aria-label="Schedule for Dr. Hakizimana Bosco">
+      <tbody>
+        <tr><th>Thursay</th><td>09:00 - 17:00</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <img src=" doctors/dr charles nkurunziza.png" alt="Dr. dr charles nkurunziza.png">
+      <div class="badge">ENT SURGERY</div>
+      <h2>Dr. Charles NKURUNZIZA</h2>
+      <p>ENT SURGERY</p>
+    </div>
+    <table class="schedule-table" aria-label="Schedule for Dr. Umutoni Solange">
+      <tbody>
+        <tr><th>Friday</th><td>16:00 – 20:00</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+   <div class="card">
+    <div class="card-header">
+      <img src=" doctors/Dr Gratien Tuyishime.png" alt="Dr Gratien Tuyishime.png">
+      <div class="badge">ENT SURGERY</div>
+      <h2>Dr. Gratien Tuyishime</h2>
+      <p>ENT SURGERY</p>
+    </div>
+    <table class="schedule-table" aria-label="Schedule for Dr. Hakizimana Bosco">
+      <tbody>
+        <tr><th>Saturday</th><td>16:00 - 20:00</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<!--schedule end-->
+
+    </main>
+    <footer>
+           <!--? Footer Start-->
+        <div class="footer-area section-bg" data-background=" gallery/footer_bg.jpg">
+            <div class="container">
+                <div class="footer-top footer-padding">
+                    <div class="row d-flex justify-content-between">
+                        <div class="col-xl-3 col-lg-3 col-md-4 col-sm-8">
+                            <div class="single-footer-caption mb-50">
+                                <!-- logo -->
+                                <div class="footer-logo">
+                                    <a href="index.html"><img src=" logo/logo2_footer.png" alt=""></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-5">
+                            <div class="single-footer-caption mb-50">
+                                <div class="footer-tittle">
+                                    <h4>About Us</h4>
+                                    <div class="footer-pera">
+                                        <p class="info1">Gasabo, Kimironko opposite Kimironko car bus station. </p>
+                                        <p class="info1">Kigali Medical Center offers medical consultation in General Medicine, Pediatrics, Dermatology,…</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-8">
+                            <div class="single-footer-caption mb-50">
+                                <div class="footer-number mb-50">
+                                    <h4><span>+250 </span>780 864 534</h4>
+                                    <p>kmcpolyclinic@yahoo.com</p>
+                                </div>
+                                <!-- Form -->
+      
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <div class="row d-flex justify-content-between align-items-center">
+                        <div class="col-xl-9 col-lg-8">
+                            <div class="footer-copy-right">
+                                <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved by KMC <br> site by <a href="https://shejakalisaauxille.vercel.app/" target="_blank">SHEJA KALISA Auxille</a>
+  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-4">
+                            <!-- Footer Social -->
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End-->
+    </footer>
+    <!-- Scroll Up -->
+    <div id="back-top" >
+        <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
+    </div>
+
+    <!-- JS here -->
+	
+    <script src="./js/vendor/modernizr-3.5.0.min.js"></script>
+    <!-- Jquery, Popper, Bootstrap -->
+    <script src="./js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="./js/popper.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <!-- Jquery Mobile Menu -->
+    <script src="./js/jquery.slicknav.min.js"></script>
+
+    <!-- Jquery Slick , Owl-Carousel Plugins -->
+    <script src="./js/owl.carousel.min.js"></script>
+    <script src="./js/slick.min.js"></script>
+    <!-- One Page, Animated-HeadLin -->
+    <script src="./js/wow.min.js"></script>
+    <script src="./js/animated.headline.js"></script>
+    
+    <!-- Nice-select, sticky -->
+    <script src="./js/jquery.nice-select.min.js"></script>
+    <script src="./js/jquery.sticky.js"></script>
+    <script src="./js/jquery.magnific-popup.js"></script>
+
+    <!-- contact js -->
+    <script src="./js/contact.js"></script>
+    <script src="./js/jquery.form.js"></script>
+    <script src="./js/jquery.validate.min.js"></script>
+    <script src="./js/mail-script.js"></script>
+    <script src="./js/jquery.ajaxchimp.min.js"></script>
+    
+    <!-- Jquery Plugins, main Jquery -->	
+    <script src="./js/plugins.js"></script>
+    <script src="./js/main.js"></script>
+    
+    </body>
+</html>
